@@ -6,25 +6,31 @@ import { cookies } from "next/headers";
 // Session duration (1 week)
 const SESSION_DURATION = 60 * 60 * 24 * 7;
 
-// Set session cookie
+//Set session cookie
 export async function setSessionCookie(idToken: string) {
   const cookieStore = await cookies();
 
-  // Create session cookie
-  const sessionCookie = await auth.createSessionCookie(idToken, {
-    expiresIn: SESSION_DURATION * 1000, // milliseconds
-  });
+  try {
+    // Create session cookie
+    const sessionCookie = await auth.createSessionCookie(idToken, {
+      expiresIn: SESSION_DURATION * 1000, // milliseconds
+    });
 
-  // Set cookie in the browser
-  cookieStore.set("session", sessionCookie, {
-    maxAge: SESSION_DURATION,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    sameSite: "lax",
-  });
+    // Set cookie in the browser
+    cookieStore.set("session", sessionCookie, {
+      maxAge: SESSION_DURATION,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      sameSite: "lax",
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error creating session cookie:", error);
+    return { success: false, error };
+  }
 }
-
 export async function signUp(params: SignUpParams) {
   const { uid, name, email } = params;
 
@@ -81,10 +87,10 @@ export async function signIn(params: SignInParams) {
     await setSessionCookie(idToken);
     return {
       success: true,
-      message: "Signed in successfully",
-    };
+      message: "Signed in successfully.",
+    }
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
 
     return {
       success: false,
@@ -132,6 +138,7 @@ export async function getCurrentUser(): Promise<User | null> {
 // Check if user is authenticated
 export async function isAuthenticated() {
   const user = await getCurrentUser();
+  console.log(user)
   return !!user;
-}
 
+}
