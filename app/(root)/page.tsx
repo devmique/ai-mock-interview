@@ -9,6 +9,7 @@ import {
   getInterviewsByUserId,
   getLatestInterviews,
 } from "@/lib/actions/general.action";
+import LogoutButton from "@/components/LogoutButton";
 
 async function Home() {
   const user = await getCurrentUser();
@@ -23,6 +24,7 @@ async function Home() {
 
   return (
     <>
+      <LogoutButton/>
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
 

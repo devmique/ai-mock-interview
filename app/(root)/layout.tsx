@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import LogoutButton from '@/components/LogoutButton'
 import { isAuthenticated } from '@/lib/actions/auth.action'
 import { redirect } from 'next/navigation'
 const RootLayout = async ({children}: {children: React.ReactNode}) => {
@@ -17,7 +16,7 @@ const RootLayout = async ({children}: {children: React.ReactNode}) => {
       <Image src="logo.svg" alt="logo" width={30} height={32}/>
       <h2 className="text-primary-100">AInterview</h2>
       </Link>
-      <LogoutButton/>
+    
      </nav>
      {children}
     </div>
