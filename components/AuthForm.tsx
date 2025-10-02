@@ -8,12 +8,12 @@ import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useState} from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
+  
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
@@ -31,6 +31,7 @@ const authFormSchema = (type: FormType) => {
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
 
+const [loading, setLoading] = useState(false);
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,6 +44,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      setLoading(true);
       if (type === "sign-up") {
         const { name, email, password } = data;
 
@@ -92,6 +94,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
     } catch (error) {
       console.log(error);
       toast.error(`There was an error: ${error}`);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -139,7 +143,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
             />
 
             <Button className="btn" type="submit">
-              {isSignIn ? "Sign In" : "Create an Account"}
+             
+              {isSignIn ? loading? "Signing in...":"Sign In" : loading? "Creating your Account...": "Create an Account"}
             </Button>
           </form>
         </Form>
