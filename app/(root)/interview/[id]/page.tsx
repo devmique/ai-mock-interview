@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
+import { Button } from "@/components/ui/button";
 import Agent from "@/components/Agent";
 import { getRandomInterviewCover } from "@/lib/utils";
-
+import Link from "next/link";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
   getFeedbackByInterviewId,
   getInterviewById,
@@ -26,8 +27,11 @@ const InterviewDetails = async ({ params }: RouteParams) => {
 
   return (
     <>
+    <Link href="/">
+        <Button className="cursor-pointer bg-transparent text-white hover:bg-transparent"><ArrowBackIcon/></Button>
+      </Link>  
       <div className="flex flex-row gap-4 justify-between">
-        <div className="flex flex-row gap-4 items-center max-sm:flex-col">
+            <div className="flex flex-row gap-4 items-center max-sm:flex-col">
           <div className="flex flex-row gap-4 items-center">
             <Image
               src={getRandomInterviewCover()}

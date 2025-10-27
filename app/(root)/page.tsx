@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
 import InterviewCard from "@/components/InterviewCard";
 
@@ -37,14 +36,6 @@ async function Home() {
             <Link href="/interview">Start an Interview</Link>
           </Button>
         </div>
-
-        <Image
-          src="/robot.png"
-          alt="robo-dude"
-          width={400}
-          height={400}
-          className="max-sm:hidden"
-        />
       </section>
 
       <section className="flex flex-col gap-6 mt-8">

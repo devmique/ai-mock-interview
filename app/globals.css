@@ -80,7 +80,7 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --input: oklch(23.613% 0.00152 16.294 / 0.15);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -160,6 +160,15 @@
 }
 
 @layer components {
+  .card-cta{
+      background-color: oklch(21% 0.006 285.885);
+      @apply flex flex-row rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+   
+  }
+  .login-card {
+    background-color: oklch(21% 0.006 285.885); /* <- direct CSS here */
+    @apply rounded-2xl min-h-full text-white;   /* <- Tailwind utilities only */
+  }
   .btn-call {
     @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible;
 
@@ -176,7 +185,7 @@
     @apply flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
   }
   .btn-primary {
-    @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
+    @apply w-fit !bg-blue-700 !text-light-100 hover:!bg-blue-600 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
   }
   .btn-secondary {
     @apply w-fit !bg-dark-200 !text-primary-200 hover:!bg-dark-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
@@ -194,22 +203,22 @@
   }
 
   .card {
-    @apply dark-gradient rounded-2xl min-h-full;
+    @apply bg-gray-800 rounded-2xl min-h-full;
   }
 
   .form {
     @apply w-full;
 
     .label {
-      @apply !text-light-100 !font-normal;
+      @apply !text-white !font-normal;
     }
 
     .input {
-      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
+      @apply !bg-dark-100 !rounded-sm !min-h-12 !px-5 placeholder:!text-white;
     }
 
     .btn {
-      @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+      @apply !w-full !bg-blue-700 !text-light-100 hover:!bg-blue-600 !rounded-sm !min-h-10 !font-bold !px-5 cursor-pointer;
     }
   }
 
@@ -225,10 +234,10 @@
     }
 
     .avatar {
-      @apply z-10 flex items-center justify-center blue-gradient rounded-full size-[120px] relative;
+      @apply z-10 flex items-center justify-center blue-gradient-dark rounded-full size-[120px] relative;
 
       .animate-speak {
-        @apply absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-200 opacity-75;
+        @apply absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-100 opacity-75;
       }
     }
 
@@ -269,9 +278,7 @@
     @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
   }
 
-  .card-cta {
-    @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
-  }
+  
 
   .interviews-section {
     @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
@@ -290,9 +297,11 @@
   }
 
   .card-interview {
-    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+    background-color: oklch(21% 0.006 285.885);
+    @apply rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
 
     .badge-text {
+    
       @apply text-sm font-semibold capitalize;
     }
   }

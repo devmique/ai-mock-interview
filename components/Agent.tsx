@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk"; 
+import CallIcon from '@mui/icons-material/Call';
+import CallEndIcon from '@mui/icons-material/CallEnd';
 import { interviewer } from "@/lib/constants";
 import { createFeedback } from "@/lib/actions/general.action";
-
+import Face6Icon from '@mui/icons-material/Face6';
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -158,13 +160,7 @@ const Agent = ({
         {/* AI Interviewer Card */}
         <div className="card-interviewer">
           <div className="avatar">
-            <Image
-              src="/ai-avatar.png"
-              alt="profile-image"
-              width={65}
-              height={54}
-              className="object-cover"
-            />
+            <Face6Icon sx={{ fontSize: "70px" }}/>
             {isSpeaking && <span className="animate-speak" />}
           </div>
           <h3>AI Interviewer</h3>
@@ -213,13 +209,13 @@ const Agent = ({
 
             <span className="relative">
               {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Call"
+                ? <CallIcon/>
                 : "Calling..."}
             </span>
           </button>
         ) : (
           <button className="btn-disconnect" onClick={() => handleDisconnect()}>
-            End
+            <CallEndIcon/>
           </button>
         )}
       </div>
