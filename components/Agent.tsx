@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk"; 
@@ -35,15 +35,42 @@ const Agent = ({
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
+ 
+ //calling and end sounds
+  const callingSound = useRef<HTMLAudioElement | null>(null);
+  const endSound = useRef<HTMLAudioElement | null>(null);
+ 
+  useEffect(() => {
+  callingSound.current = new Audio("/sounds/phone-ringing.mp3");
+  callingSound.current.loop = true;
+
+  endSound.current = new Audio("/sounds/end-call.mp3");
+}, []);
+
+  useEffect(() => {
+  if (callStatus === CallStatus.CONNECTING) {
+    callingSound.current?.play();
+  }
+
+  if (callStatus === CallStatus.ACTIVE) {
+    callingSound.current?.pause();
+    callingSound.current!.currentTime = 0;
+  }
+
+  if (callStatus === CallStatus.FINISHED) {
+    callingSound.current?.pause();
+    callingSound.current!.currentTime = 0;
+
+    endSound.current?.play();
+  }
+}, [callStatus]);
 
   useEffect(() => {
     const onCallStart = () => {
-      console.log("✅ Call really started");
       setCallStatus(CallStatus.ACTIVE);
     };
 
     const onCallEnd = () => {
-      console.log("❌ Call really ended");
       setCallStatus(CallStatus.FINISHED);
     };
 
