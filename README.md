@@ -14,7 +14,6 @@ Built with **Next.js** for the user interface and backend logic, **Firebase** fo
 
 The project is also designed as a learning resource for integrating **AI models with real-world applications**.  
 
-If you're just getting started and need assistance or face any bugs, join our active **Discord community with over 50k+ members** — a place where people help each other out.  
 
 ---
 
